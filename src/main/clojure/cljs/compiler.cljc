@@ -365,12 +365,10 @@
 
 (defn munge-reserved [reserved]
   (t/ann-form
-    (t/ann-form
-      (fn [s]
-        (if-not (nil? (get reserved s))
-          (str s "$")
-          s))
-      [t/Str :-> t/Str])
+    (fn [s]
+      (if-not (nil? (get reserved s))
+        (str s "$")
+        s))
     [t/Str :-> t/Str])
   )
 

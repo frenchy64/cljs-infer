@@ -7,6 +7,8 @@
 ;   You must not remove this notice, or any other, from this software.
 
 (ns cljs.analyzer
+  {:lang :core.typed
+   :core.typed {:features {:runtime-infer true}}}
   #?(:clj  (:refer-clojure :exclude [macroexpand-1 ensure])
      :cljs (:refer-clojure :exclude [macroexpand-1 ns-interns ensure js-reserved]))
   #?(:cljs (:require-macros
@@ -23,6 +25,7 @@
                     [cljs.tagged-literals :as tags]
                     [clojure.tools.reader :as reader]
                     [clojure.tools.reader.reader-types :as readers]
+                    [clojure.core.typed :as t]
                     [clojure.edn :as edn])
      :cljs (:require [goog.string :as gstring]
                      [clojure.string :as string]
@@ -2955,7 +2958,7 @@
        (when (some? (find-ns-obj 'cljs.spec))
          @cached-var))))
 
-(defn macroexpand-1*
+(defn ^::t/no-infer macroexpand-1*
   [env form]
   (let [op (first form)]
     (if (contains? specials op)
@@ -3013,7 +3016,7 @@
                 :else form))
             form)))))
 
-(defn macroexpand-1
+(defn ^::t/no-infer macroexpand-1
   "Given a env, an analysis environment, and form, a ClojureScript form,
    macroexpand the form once."
   [env form]

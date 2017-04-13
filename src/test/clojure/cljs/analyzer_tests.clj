@@ -175,7 +175,7 @@
 (def test-cenv (atom {}))
 (def test-env (assoc-in (a/empty-env) [:ns :name] 'cljs.core))
 
-(a/no-warn
+#_(a/no-warn
   (e/with-compiler-env test-cenv
     (binding [a/*analyze-deps* false]
       (a/analyze-file (io/file "src/main/cljs/cljs/core.cljs")))))

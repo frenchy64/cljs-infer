@@ -7,6 +7,8 @@
 ;   You must not remove this notice, or any other, from this software.
 
 (ns cljs.compiler
+  {:lang :core.typed
+   :core.typed {:features {:runtime-infer true}}}
   #?(:clj (:refer-clojure :exclude [munge macroexpand-1 ensure])
      :cljs (:refer-clojure :exclude [munge macroexpand-1 ensure js-reserved]))
   #?(:cljs (:require-macros [cljs.compiler.macros :refer [emit-wrap]]
@@ -21,6 +23,7 @@
                     [cljs.analyzer :as ana]
                     [cljs.source-map :as sm]
                     [clojure.data.json :as json]
+                    [clojure.core.typed :as t]
                     [cljs.js-deps :as deps])
      :cljs (:require [goog.string :as gstring]
                      [clojure.string :as string]

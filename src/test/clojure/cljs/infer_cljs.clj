@@ -27,7 +27,8 @@
 
 
 (defn infer [spec-or-type]
-  (binding [*infer-fn* (case spec-or-type
+  (binding [infer/*max-path-occurrences* 700
+            *infer-fn* (case spec-or-type
                          :type t/runtime-infer
                          :spec t/spec-infer)]
     ;; FIXME shouldn't need this, but some types
